@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:mymantra/pages/quote_dao.dart';
+import 'package:mymantra/database/quote_dao.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:flutter/services.dart';

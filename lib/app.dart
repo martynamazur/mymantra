@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymantra/pages/about_app.dart';
 import 'package:mymantra/pages/cloud_synchronization.dart';
-import 'package:mymantra/pages/database_helper.dart';
+import 'package:mymantra/database/database_helper.dart';
 import 'package:mymantra/pages/home.dart';
 
 import 'package:mymantra/pages/my_cards.dart';
