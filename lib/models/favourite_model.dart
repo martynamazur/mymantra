@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mymantra/models/quote_model.dart';
-import 'package:mymantra/pages/database_helper.dart';
+import 'package:mymantra/database/database_helper.dart';
 
 class FavouriteModel {
 

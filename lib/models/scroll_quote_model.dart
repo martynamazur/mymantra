@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import '../pages/database_helper.dart';
+import '../database/database_helper.dart';
 import 'quote_model.dart';
 
 class ScrollQuoteModel extends ChangeNotifier {
