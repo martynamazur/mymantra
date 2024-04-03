@@ -5,6 +5,9 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:flutter/services.dart';
 
+import 'category_dao.dart';
+import 'my_folders_dao.dart';
+
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
   static Database? _database;
@@ -17,39 +20,53 @@ class DatabaseHelper {
 
   Future<Database> get database async {
     if (_database != null) {
-      print('brak');
       return _database!;
     }
     _database = await initDatabase();
-    print('inicjalizacja');
     return _database!;
   }
 
   Future<Database> initDatabase() async {
-    print('inicjalizacja');
-    // Ścieżka do bazy danych na urządzeniu
     var databasesPath = await getDatabasesPath();
     var path = join(databasesPath, 'my_database.db');
-
-    // Sprawdź, czy baza danych już istnieje
     bool exists = await databaseExists(path);
 
     if (!exists) {
-      print("Hello, world!"); // Wypisuje "Hello, world!" w konsoli lub terminalu
+      ByteData data =
+      await rootBundle.load('assets/database/my_database.sqlite');
+      List<int> bytes =
+      data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      await File(path)
+          .writeAsBytes(bytes, flush: true); // Changed to writeAsBytes
 
-      // Kopia bazy danych z zasobów (assets) do lokalizacji na urządzeniu
-      ByteData data = await rootBundle.load('assets/database/my_database.sqlite');
-      List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-      await File(path).writeAsBytes(bytes, flush: true); // Changed to writeAsBytes
+
+      await openDatabase(path, version: 1,
+          onCreate: (Database db, int version) async {
+            await db.execute('''
+          CREATE TABLE IF NOT EXISTS Folders (
+            folder_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            folder_name TEXT NOT NULL
+          )
+        ''');
+          }
+      );
     }
 
-    // Otwórz lub stwórz bazę danych
     return openDatabase(path, readOnly: true);
   }
+
 
   Future<QuoteDao> getQuoteDao() async {
     final db = await database;
     return QuoteDao(db);
   }
 
+  Future<CategoryDao> getCategoryDao() async {
+    return CategoryDao(_database!);
+
+  }
+  Future<FolderDao> getFolderDao() async{
+    return FolderDao(_database!);
+
+  }
 }
