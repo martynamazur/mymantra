@@ -27,7 +27,9 @@ dependencies:
   shared_preferences: ^2.2.2
   path_provider: ^2.1.2
   image_gallery_saver: ^2.0.3
-  permission_handler: ^9.2.0
+  permission_handler: ^11.3.1
+  permission_handler_android: ^12.0.5
+  permission_handler_apple: ^9.4.4
   screenshot: ^2.1.0
   sqflite: ^2.3.2
   flutter_riverpod: ^2.5.1
@@ -37,6 +39,15 @@ dependencies:
   flutter_hooks: ^0.20.5
   clay_containers: ^0.3.4
   glassmorphism: ^3.0.0
+  flutter_colorpicker: ^1.0.3
+  flutter_svg: ^2.0.10+1
+  flutter_dotenv: ^5.1.0
+  http: ^1.0.0
+  toggle_switch: ^2.3.0
+  share_plus: ^4.1.0
+  flutter_feather_icons: ^2.0.0+1
+  flutter_tts: ^4.0.2
+
 
 
 dev_dependencies:
@@ -52,6 +63,7 @@ dev_dependencies:
 flutter:
 
   assets:
+    - .env
     - assets/database/my_database.sqlite
     - assets/images/app_icon.png
     - assets/images/arrow.png
@@ -79,6 +91,8 @@ flutter:
     - assets/backgrounds/background3.png
     - assets/backgrounds/background4.png
     - assets/backgrounds/backtest.png
+    - assets/icons/heart.svg
+    - assets/icons/bot.png
 
 
   uses-material-design: true
