@@ -10,6 +10,7 @@ Used libraries
 - screenshot : for capturing/making images from widgets
 - image_gallery_saver : for saving wallpapers to the phone gallery
 - permission_handler
+- flutter_dotenv
 
 Other
 - OpenAi API
