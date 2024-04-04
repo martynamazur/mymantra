@@ -1,16 +1,21 @@
-# mymantra
+My Mantra:  Your Personal Meditation Companion 
+About app:
+My Mantra is a groundbreaking meditation companion app designed to enhance your mindfulness practice with a collection of curated quotes, affirmations, mantras, and AI-generated content. 
 
-A new Flutter project.
+Used libraries
+- sqflite : database
+- flutter_riverpod, provider : state managment
+- flutter_tts : for creating audio from text
+- share_plus : for sharing content (images; wallpapers) to the other apps
+- screenshot : for capturing/making images from widgets
+- image_gallery_saver : for saving wallpapers to the phone gallery
+- permission_handler
 
-## Getting Started
+Other
+- OpenAi API
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
