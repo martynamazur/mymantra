@@ -2,7 +2,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mymantra/pages/myCards/Repository/cards_impl.dart';
 
-import '../../../models/category_model.dart';
+import '../models/category_model.dart';
 import '../Repository/cards_repository.dart';
 
 final categoryRepositoryProvider = Provider<CardsRepository>((ref) {

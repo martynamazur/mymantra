@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 
 import '../database/database_helper.dart';
-import 'folder.dart';
+
+import '../pages/myCards/models/folder.dart';
 
 class AddNewCardProvider extends ChangeNotifier{
   String quoteContent = "";

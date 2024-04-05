@@ -3,12 +3,16 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:mymantra/config/app_utils.dart';
-import 'package:mymantra/pages/home/capture_screenshot_manager.dart';
+import 'package:mymantra/pages/home/domain/use_cases/capture_screenshot_manager.dart';
 import 'package:mymantra/pages/home/provider/audio_provider.dart';
-import 'package:mymantra/pages/home/share_content_manager.dart';
+import 'package:mymantra/pages/home/domain/use_cases/share_content_manager.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
-import '../../providers/providers.dart';
+import 'package:vibration/vibration.dart';
+import '../../../providers/providers.dart';
+//import 'package:vibration/vibration.dart';
+
+
 
 class Home extends ConsumerWidget {
   final ScreenshotController _screenshotController = ScreenshotController();
@@ -164,11 +168,14 @@ class Home extends ConsumerWidget {
                             ref.read(isSoundOnProvider.notifier).state = false;
                           }else{
                             ref.read(isSoundOnProvider.notifier).state = true;
+                            //ref.read(audioProvider).speak(quotes[index].quote_content);
+
                             //audio.speak(quotes[index].quote_content);
+
                           }
 
                         },
-                        icon: scrollQuoteModel.isSoundOff == 1
+                        icon:  ref.watch(isSoundOnProvider) == true
                             ? Icon(FeatherIcons.volume1)
                             : Icon(FeatherIcons.volumeX),
                         color: Colors.white60,

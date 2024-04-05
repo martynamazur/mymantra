@@ -1,5 +1,5 @@
 
-import '../../../models/folder.dart';
+import '../models/folder.dart';
 
 abstract class MyFoldersRepository {
   Future<List<Folder>> fetchFolders();

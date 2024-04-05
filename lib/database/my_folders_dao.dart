@@ -1,5 +1,5 @@
 import 'package:sqflite/sqflite.dart';
-import '../models/folder.dart';
+import '../pages/myCards/models/folder.dart';
 
 class FolderDao {
   final Database _database;

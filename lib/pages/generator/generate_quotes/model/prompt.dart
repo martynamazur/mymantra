@@ -1,9 +1,10 @@
 class QuotePrompt{
   int amount = 1;
   bool isShort = true;
+  int sentenceAmount = 1;
 
 
-  QuotePrompt(this.amount, this.isShort);
+  QuotePrompt(this.amount, this.isShort, this.sentenceAmount);
 
   String createPrompt(String description){
     String promptType = isShort ? "short" : "long";

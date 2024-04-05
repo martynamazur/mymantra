@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mymantra/pages/custom_style/theme.dart';
+import 'package:mymantra/config/custom_style/theme.dart';
+
 
 import '../generate_quotes/provider/generate_quotes_provider.dart';
 
