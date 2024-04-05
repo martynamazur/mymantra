@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mymantra/models/category_model.dart';
+import 'package:mymantra/pages/myCards/models/category_model.dart';
 import 'package:mymantra/pages/myCards/Repository/cards_impl.dart';
 
 class CardsProvider extends ChangeNotifier {

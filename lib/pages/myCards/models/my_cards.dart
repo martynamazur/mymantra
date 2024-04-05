@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mymantra/models/folder.dart';
-import 'package:mymantra/pages/myCards/Repository/my_folders_impl.dart';
+import 'package:mymantra/config/custom_style/theme.dart';
+
 import 'package:mymantra/pages/myCards/provider/category_provider.dart';
 import 'package:mymantra/pages/myCards/provider/folder_provider.dart';
 
-import 'package:mymantra/providers/providers.dart';
+import 'category_model.dart';
+import 'folder.dart';
 
-import '../../models/category_model.dart';
-import '../custom_style/theme.dart';
+
 
 class MyCards extends StatefulWidget {
   const MyCards({Key? key}) : super(key: key);

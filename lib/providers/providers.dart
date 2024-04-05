@@ -2,8 +2,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mymantra/pages/myCards/provider/cards_provider.dart';
 
-import '../models/settings_model.dart';
-import '../models/theme_model.dart';
+import '../pages/settings/settings_model.dart';
+import '../pages/theme/theme_model.dart';
 import '../models/scroll_quote_model.dart';
 
 

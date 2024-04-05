@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mymantra/models/theme_model.dart';
-import 'package:mymantra/pages/custom_style/my_custom_appbar.dart';
-import 'package:mymantra/pages/custom_style/theme.dart';
+import 'package:mymantra/pages/theme/theme_model.dart';
+
 import 'package:mymantra/providers/providers.dart';
 
+import '../../config/custom_style/primary_app_bar.dart';
+import '../../config/custom_style/theme.dart';
 import '../../models/background_model.dart';
-import '../custom_style/primary_app_bar.dart';
+
 
 class ThemeScreen extends ConsumerWidget {
   ThemeScreen({Key? key}) : super(key: key);

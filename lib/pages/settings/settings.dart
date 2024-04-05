@@ -1,20 +1,15 @@
-import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mymantra/models/settings_model.dart';
-import 'package:mymantra/pages/custom_style/custom_switch.dart';
-import 'package:mymantra/pages/custom_style/primary_app_bar.dart';
+import 'package:mymantra/config/custom_style/primary_app_bar.dart';
+import 'package:mymantra/config/custom_style/theme.dart';
 
 import '../../config/AppStrings.dart';
-import '../custom_style/my_custom_appbar.dart';
-import '../custom_style/theme.dart';
+
 import '../../providers/providers.dart';
 
 class Settings extends ConsumerWidget {
-  const Settings({Key? key}) : super(key: key);
+  const Settings({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,8 +22,8 @@ class Settings extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              PrimaryAppBar(title: AppStrings.settings),
-              SizedBox(height: 32),
+              const PrimaryAppBar(title: AppStrings.settings),
+              const SizedBox(height: 32),
               Container(
                 decoration: AppDecoration.neumorphicBackground,
                 //margin: const EdgeInsets.all(16.0),
@@ -54,7 +49,7 @@ class Settings extends ConsumerWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 32),// Autoscorll
+              const SizedBox(height: 32), // Autoscorll
               Container(
                 decoration: AppDecoration.neumorphicBackground,
                 //margin: const EdgeInsets.all(16.0),
@@ -66,10 +61,10 @@ class Settings extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text('Voice Assistant:',
+                        const Text('Voice Assistant:',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w400)),
-                        Text('Male',
+                        const Text('Male',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w300)),
                         Switch(
@@ -79,7 +74,7 @@ class Settings extends ConsumerWidget {
                                   .read(settingsModelProvider)
                                   .updateVoiceAssistant();
                             }),
-                        Text('Female',
+                        const Text('Female',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w300))
                       ],
@@ -87,7 +82,7 @@ class Settings extends ConsumerWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 32),// Voice Assistant,
+              const SizedBox(height: 32), // Voice Assistant,
               Row(
                 //mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -247,7 +242,7 @@ class Settings extends ConsumerWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
             ],
           ),
         ),

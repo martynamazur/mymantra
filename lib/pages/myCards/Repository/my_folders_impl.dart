@@ -1,7 +1,9 @@
 
 import 'package:mymantra/database/database_helper.dart';
-import 'package:mymantra/models/folder.dart';
+
 import 'package:mymantra/pages/myCards/Repository/my_folders_repository.dart';
+
+import '../models/folder.dart';
 
 class MyFoldersImpl extends MyFoldersRepository {
   @override

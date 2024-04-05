@@ -4,10 +4,11 @@ import 'package:mymantra/pages/generator/generate_quotes/screens/ai_quote_genera
 import 'package:mymantra/pages/generator/save_generated_quotes/save_generated_quotes.dart';
 import 'package:mymantra/pages/importData/cloud_synchronization.dart';
 import 'package:mymantra/database/database_helper.dart';
-import 'package:mymantra/pages/home/home.dart';
+import 'package:mymantra/pages/home/presentation/home.dart';
 
-import 'package:mymantra/pages/myCards/my_cards.dart';
+
 import 'package:mymantra/pages/menu/menu.dart';
+import 'package:mymantra/pages/myCards/models/my_cards.dart';
 import 'package:mymantra/pages/reminders/reminders.dart';
 import 'package:mymantra/pages/settings/settings.dart';
 

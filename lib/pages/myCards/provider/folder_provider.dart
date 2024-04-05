@@ -1,8 +1,9 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mymantra/models/folder.dart';
+
 import 'package:mymantra/pages/myCards/Repository/my_folders_impl.dart';
 import 'package:mymantra/pages/myCards/Repository/my_folders_repository.dart';
+import 'package:mymantra/pages/myCards/models/folder.dart';
 
 final myFoldersRepositoryProvider = Provider<MyFoldersRepository>((ref) {
   return MyFoldersImpl();

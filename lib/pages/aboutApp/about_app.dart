@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mymantra/pages/custom_style/primary_app_bar.dart';
 
 import '../../config/AppStrings.dart';
-import '../custom_style/theme.dart';
+import '../../config/custom_style/primary_app_bar.dart';
+import '../../config/custom_style/theme.dart';
 
 class AboutApp extends StatelessWidget {
   const AboutApp({super.key});

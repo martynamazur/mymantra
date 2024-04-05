@@ -1,4 +1,4 @@
-import 'package:mymantra/models/category_model.dart';
+import 'package:mymantra/pages/myCards/models/category_model.dart';
 import 'package:mymantra/pages/myCards/Repository/cards_repository.dart';
 
 import '../../../database/database_helper.dart';
