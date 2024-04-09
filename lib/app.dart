@@ -9,6 +9,7 @@ import 'package:mymantra/pages/home/presentation/home.dart';
 
 import 'package:mymantra/pages/menu/menu.dart';
 import 'package:mymantra/pages/myCards/models/my_cards.dart';
+import 'package:mymantra/pages/reminders/notifications.dart';
 import 'package:mymantra/pages/reminders/reminders.dart';
 import 'package:mymantra/pages/settings/settings.dart';
 
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         '/Home': (context) => Home(),
         '/SaveQuote': (context) => SaveQuote(),
         '/AiQuoteGenerator': (context) => AiQuoteGenerator(),
+        '/Notifications': (context) => Notifications()
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

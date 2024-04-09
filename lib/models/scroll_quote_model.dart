@@ -4,10 +4,7 @@ import 'quote_model.dart';
 
 class ScrollQuoteModel extends ChangeNotifier {
   List<Quote> quotes = [];
-
   int currentPage = 0;
-  int isSoundOff = 0;
-  String backgroundPath = 'assets/backgrounds/backtest.png';
 
   ScrollQuoteModel() {
     loadQuotes();
@@ -18,6 +15,7 @@ class ScrollQuoteModel extends ChangeNotifier {
       final databaseHelper = DatabaseHelper();
       final quoteDao = await databaseHelper.getQuoteDao();
       final loadedQuotes = await quoteDao.getAllQuotes();
+      //final repository = Provider.of<QuoteRepository>(context, listen: false);
 
       quotes.addAll(loadedQuotes);
       notifyListeners();
