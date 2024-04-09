@@ -45,7 +45,7 @@ class MenuScreen extends StatelessWidget {
                   GridItem(
                     iconPath: 'assets/images/ring.png',
                     label: AppStrings.reminders,
-                    routeWidget: '/Reminders',
+                    routeWidget: '/Notifications',
                   ),
                   GridItem(
                     iconPath: 'assets/images/settings.png',

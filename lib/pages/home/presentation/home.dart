@@ -9,19 +9,17 @@ import 'package:mymantra/pages/home/domain/use_cases/share_content_manager.dart'
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:vibration/vibration.dart';
+import '../../../models/scroll_quote_model.dart';
 import '../../../providers/providers.dart';
 //import 'package:vibration/vibration.dart';
-
-
 
 class Home extends ConsumerWidget {
   final ScreenshotController _screenshotController = ScreenshotController();
 
-  Home({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollQuoteModel = ref.watch(scrollQuoteModelProvider);
+    int currentIndex = scrollQuoteModel.currentPage;
 
     return Scaffold(
       backgroundColor: const Color(0xE8EBF2FF),
@@ -38,55 +36,37 @@ class Home extends ConsumerWidget {
             children: [
               Screenshot(
                 controller: _screenshotController,
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                          ref.read(themeProvider).currentBackgroundPath),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: PageView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: ref.read(scrollQuoteModelProvider).quotes.length,
-                    onPageChanged: (int page) {
-                      if (ref.read(scrollQuoteModelProvider).currentPage !=
-                          page) {
-                        ref.read(scrollQuoteModelProvider).updatePage(page);
-                      }
-                    },
-                    itemBuilder: (context, index) {
-                      return Consumer(
-                        builder: (context, ref, child) {
-                          return Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Text(
-                                ref
-                                    .read(scrollQuoteModelProvider)
-                                    .quotes[index]
-                                    .quote_content,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: AppUtils.getSizeFromSettings(
-                                      ref.read(settingsModelProvider).textSize),
-                                  fontStyle: AppUtils.getFontFromSettings(
-                                      ref.read(settingsModelProvider).fontType),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
+                child: PageView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: scrollQuoteModel.quotes.length,
+                  onPageChanged: (int page) {
+                    if (scrollQuoteModel.currentPage != page) {
+                      ref.read(scrollQuoteModelProvider).updatePage(page);
+                      currentIndex = page;
+                      ref.read(audioProvider).speak(
+                          scrollQuoteModel.quotes[currentIndex].quote_content);
+                    }
+                  },
+                  itemBuilder: (context, index) {
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          scrollQuoteModel.quotes[index].quote_content,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: AppUtils.getSizeFromSettings(
+                                ref.read(settingsModelProvider).textSize),
+                            fontStyle: AppUtils.getFontFromSettings(
+                                ref.read(settingsModelProvider).fontType),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
-              _actionBar(
-                context,
-                ref,
-                scrollQuoteModel,
-              )
+              _actionBar(context, ref, scrollQuoteModel, currentIndex),
             ],
           ),
         ),
@@ -94,7 +74,7 @@ class Home extends ConsumerWidget {
     );
   }
 
-  Widget _actionBar(BuildContext context, WidgetRef ref, scrollQuoteModel) {
+  Widget _actionBar(BuildContext context, WidgetRef ref, scrollQuoteModel, int currentIndex) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Column(
@@ -109,19 +89,33 @@ class Home extends ConsumerWidget {
                   padding: const EdgeInsets.all(8),
                   decoration: AppUtils.setThemeDesign(
                       ref.read(themeProvider).backgroundChoice),
-                  child: IconButton(
-                    icon: Icon(
-                      scrollQuoteModel.quotes.isNotEmpty &&
-                              scrollQuoteModel
-                                      .quotes[scrollQuoteModel.currentPage]
-                                      .is_favourite ==
-                                  1
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: Colors.white60,
-                    ),
-                    onPressed: () async {
-                      // Do something
+                  child: Consumer(
+                    builder: (context, ref, child) {
+                      final isFavourited =
+                          ref.watch(scrollQuoteModelProvider).quotes.isNotEmpty &&
+                              ref
+                                  .watch(scrollQuoteModelProvider)
+                                  .quotes[ref
+                                  .watch(scrollQuoteModelProvider)
+                                  .currentPage]
+                                  .is_favourite ==
+                                  1;
+
+                      return IconButton(
+                        icon: Icon(
+                          isFavourited ? Icons.favorite : Icons.favorite_border,
+                          color: Colors.white60,
+                        ),
+                        onPressed: () async {
+
+                          int isFavourited = scrollQuoteModel
+                              .quotes[scrollQuoteModel.currentPage].is_favourite;
+                          scrollQuoteModel
+                              .updateLikeState(isFavourited == 1 ? 0 : 1);
+
+
+                        },
+                      );
                     },
                   ),
                 ),
@@ -132,7 +126,8 @@ class Home extends ConsumerWidget {
                   padding: const EdgeInsets.all(8),
                   child: IconButton(
                     onPressed: () {
-                      ShareContentManager(_screenshotController).onShareXFileFromScreenshot(context);
+                      ShareContentManager(_screenshotController)
+                          .onShareXFileFromScreenshot(context);
                     },
                     icon: const Icon(Icons.share),
                     color: Colors.white60,
@@ -146,7 +141,7 @@ class Home extends ConsumerWidget {
                   child: IconButton(
                     onPressed: () async {
                       ScreenshotManager screenshotManager =
-                          ScreenshotManager(_screenshotController);
+                      ScreenshotManager(_screenshotController);
                       await screenshotManager.capturePicture(context);
                     },
                     icon: const Icon(Icons.file_download_outlined),
@@ -164,18 +159,15 @@ class Home extends ConsumerWidget {
 
                       return IconButton(
                         onPressed: () {
-                          if(isSoundOn){
+                          if (isSoundOn) {
                             ref.read(isSoundOnProvider.notifier).state = false;
-                          }else{
+                          } else {
                             ref.read(isSoundOnProvider.notifier).state = true;
-                            //ref.read(audioProvider).speak(quotes[index].quote_content);
-
-                            //audio.speak(quotes[index].quote_content);
-
+                            ref.read(audioProvider).speak(
+                                ref.read(scrollQuoteModelProvider).quotes[currentIndex].quote_content);
                           }
-
                         },
-                        icon:  ref.watch(isSoundOnProvider) == true
+                        icon: ref.watch(isSoundOnProvider) == true
                             ? Icon(FeatherIcons.volume1)
                             : Icon(FeatherIcons.volumeX),
                         color: Colors.white60,
@@ -183,7 +175,6 @@ class Home extends ConsumerWidget {
                     },
                   ),
                 ),
-
               ],
             ),
           ),
@@ -213,3 +204,4 @@ class Home extends ConsumerWidget {
   }
 
 }
+

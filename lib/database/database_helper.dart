@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:mymantra/database/quote_dao.dart';
@@ -11,6 +12,10 @@ import 'my_folders_dao.dart';
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
   static Database? _database;
+
+  StreamController<void> _databaseChangeController = StreamController<void>.broadcast();
+  Stream<void> get databaseChanges => _databaseChangeController.stream;
+
 
   factory DatabaseHelper() {
     return _instance;
@@ -68,5 +73,9 @@ class DatabaseHelper {
   Future<FolderDao> getFolderDao() async{
     return FolderDao(_database!);
 
+  }
+
+  void notifyDatabaseChanged(){
+    _databaseChangeController.add(null);
   }
 }
